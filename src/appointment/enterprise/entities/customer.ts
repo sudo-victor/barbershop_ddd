@@ -1,7 +1,7 @@
-import { Entity } from "@/core/domain/entity";
-import { UniqueId } from "@/core/domain/unique-id";
-import { Cpf } from "../value-objects/cpf";
-import { Password } from "../value-objects/password";
+import { Entity } from '@/core/domain/entity';
+import { UniqueId } from '@/core/domain/unique-id';
+import { Cpf } from '../value-objects/cpf';
+import { Password } from '../value-objects/password';
 
 export interface CustomerProps {
   name: string;
@@ -19,19 +19,19 @@ interface CreateCustomerProps {
 
 
 export class Customer extends Entity<CustomerProps> {
-  get cpf() {
-    return this.props.cpf
-  }
+	get cpf() {
+		return this.props.cpf;
+	}
 
-  get password() {
-    return this.props.password
-  }
+	get password() {
+		return this.props.password;
+	}
 
-  static create(props: CreateCustomerProps, id?: UniqueId) {
-    return new Customer({
-      ...props,
-      cpf: new Cpf(props.cpf),
-      password: new Password(props.password),
-    }, id)
-  }
+	static create(props: CreateCustomerProps, id?: UniqueId) {
+		return new Customer({
+			...props,
+			cpf: new Cpf(props.cpf),
+			password: new Password(props.password),
+		}, id);
+	}
 }

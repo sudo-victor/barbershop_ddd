@@ -1,4 +1,4 @@
-import { Barber } from "@/appointment/enterprise/entities/barber";
+import { Barber } from '@/appointment/enterprise/entities/barber';
 
 export interface BarberRepository {
   findById(id: string): Promise<Barber | undefined>;

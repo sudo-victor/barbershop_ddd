@@ -1,6 +1,6 @@
-import { Entity } from "@/core/domain/entity";
-import { Duration } from "../value-objects/duration";
-import { UniqueId } from "@/core/domain/unique-id";
+import { Entity } from '@/core/domain/entity';
+import { Duration } from '../value-objects/duration';
+import { UniqueId } from '@/core/domain/unique-id';
 
 export interface OptionServiceProps {
   name: string;
@@ -21,27 +21,27 @@ interface CreateOptionServiceProps {
 }
 
 export class OptionService extends Entity<OptionServiceProps> {
-  get duration() {
-    return this.props.duration
-  }
+	get duration() {
+		return this.props.duration;
+	}
 
-  get name() {
-    return this.props.name
-  }
+	get name() {
+		return this.props.name;
+	}
 
-  get description() {
-    return this.props.description
-  }
+	get description() {
+		return this.props.description;
+	}
 
-  get price() {
-    return this.props.price
-  }
+	get price() {
+		return this.props.price;
+	}
 
-  static create(props: CreateOptionServiceProps, id?: UniqueId) {
-    return new OptionService({
-      ...props,
-      barberId: new UniqueId(props.barberId),
-      duration: Duration.generate(props.durationInSec)
-    }, id)
-  }
+	static create(props: CreateOptionServiceProps, id?: UniqueId) {
+		return new OptionService({
+			...props,
+			barberId: new UniqueId(props.barberId),
+			duration: Duration.generate(props.durationInSec)
+		}, id);
+	}
 }

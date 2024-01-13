@@ -1,10 +1,10 @@
-import { Entity } from "@/core/domain/entity";
-import { Duration } from "../value-objects/duration";
-import { UniqueId } from "@/core/domain/unique-id";
-import { DurationCalculator } from "../services/duration-calculator";
-import { AppointmentStatus, AppointmentStatusFactory } from "../value-objects/appointment-status";
+import { Entity } from '@/core/domain/entity';
+import { Duration } from '../value-objects/duration';
+import { UniqueId } from '@/core/domain/unique-id';
+import { DurationCalculator } from '../services/duration-calculator';
+import { AppointmentStatus, AppointmentStatusFactory } from '../value-objects/appointment-status';
 
-export type AppointmentStatusProps = "scheduled" | "canceled" | "done"
+export type AppointmentStatusProps = 'scheduled' | 'canceled' | 'done'
 
 export interface AppointmentProps {
   scheduledAt: Date;
@@ -33,47 +33,47 @@ export interface CreateAppointmentProps {
 }
 
 export class Appointment extends Entity<AppointmentProps> {
-  get scheduledAt() {
-    return this.props.scheduledAt
-  }
+	get scheduledAt() {
+		return this.props.scheduledAt;
+	}
 
-  get finishedAt() {
-    return this.props.finishedAt
-  }
+	get finishedAt() {
+		return this.props.finishedAt;
+	}
 
-  get duration() {
-    return this.props.duration
-  }
+	get duration() {
+		return this.props.duration;
+	}
 
-  get status() {
-    return this.props.status
-  }
+	get status() {
+		return this.props.status;
+	}
 
-  set status(status: AppointmentStatus) {
-    this.props.status = status
-  }
+	set status(status: AppointmentStatus) {
+		this.props.status = status;
+	}
 
-  get customerId() {
-    return this.props.customerId
-  }
+	get customerId() {
+		return this.props.customerId;
+	}
 
-  constructor(props: Props, id?: UniqueId) {
-    super(props as any as AppointmentProps, id)
-    this.props.status = AppointmentStatusFactory.create(props.status, this)
-  }
+	constructor(props: Props, id?: UniqueId) {
+		super(props as any as AppointmentProps, id);
+		this.props.status = AppointmentStatusFactory.create(props.status, this);
+	}
 
-  static create(props: CreateAppointmentProps, id?: UniqueId) {
-    return new Appointment({
-      ...props,
-      status: props.status ?? "scheduled",
-      customerId: new UniqueId(props.customerId),
-      optionServiceId: new UniqueId(props.optionServiceId),
-      duration: Duration.generateByServiceDuration(props.durationOptionService),
-      finishedAt: DurationCalculator.calculateFinishDate(props.scheduledAt, props.durationOptionService)
-    }, id)
-  }
+	static create(props: CreateAppointmentProps, id?: UniqueId) {
+		return new Appointment({
+			...props,
+			status: props.status ?? 'scheduled',
+			customerId: new UniqueId(props.customerId),
+			optionServiceId: new UniqueId(props.optionServiceId),
+			duration: Duration.generateByServiceDuration(props.durationOptionService),
+			finishedAt: DurationCalculator.calculateFinishDate(props.scheduledAt, props.durationOptionService)
+		}, id);
+	}
 
-  cancel() {
-    this.status.cancel()
-  }
+	cancel() {
+		this.status.cancel();
+	}
 }

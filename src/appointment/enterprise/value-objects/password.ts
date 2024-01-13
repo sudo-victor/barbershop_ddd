@@ -1,21 +1,21 @@
-import { InvalidPasswordError } from "@/core/domain/errors/invalid-password-error"
+import { InvalidPasswordError } from '@/core/domain/errors/invalid-password-error';
 
 export class Password {
-  private value: string
+	private value: string;
 
-  constructor(value: string) {
-    if (!this.validate(value)) {
-      throw new InvalidPasswordError()
-    }
+	constructor(value: string) {
+		if (!this.validate(value)) {
+			throw new InvalidPasswordError();
+		}
 
-    this.value = value
-  }
+		this.value = value;
+	}
 
-  private validate(value: string) {
-    return value.length <= 5 ? false : true
-  }
+	private validate(value: string) {
+		return value.length <= 5 ? false : true;
+	}
 
-  toValue() {
-    return this.value
-  }
+	toValue() {
+		return this.value;
+	}
 }

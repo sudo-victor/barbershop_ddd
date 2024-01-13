@@ -1,23 +1,23 @@
-import { Customer } from "@/appointment/enterprise/entities/customer"
-import { HasherEncrypt } from "../cryptography/hasher-encrypt"
-import { CustomerRepository } from "../repositories/customer-repository"
-import { CustomerAlreadyExistsError } from "@/core/usecases/errors/customer-already-exists-error"
+import { Customer } from '@/appointment/enterprise/entities/customer';
+import { HasherEncrypt } from '../cryptography/hasher-encrypt';
+import { CustomerRepository } from '../repositories/customer-repository';
+import { CustomerAlreadyExistsError } from '@/core/usecases/errors/customer-already-exists-error';
 
 export class CreateCustomerUseCase {
-  constructor(private customerRepository: CustomerRepository, private hasher: HasherEncrypt) {}
+	constructor(private customerRepository: CustomerRepository, private hasher: HasherEncrypt) {}
 
-  async execute (input: Input) {
-    const customerExists = await this.customerRepository.findByCpf(input.cpf)
-    if (customerExists) {
-      throw new CustomerAlreadyExistsError()
-    }
+	async execute (input: Input) {
+		const customerExists = await this.customerRepository.findByCpf(input.cpf);
+		if (customerExists) {
+			throw new CustomerAlreadyExistsError();
+		}
 
-    const customerToPersit = Customer.create({
-      ...input,
-      password: this.hasher.encrypt(input.password)
-    })
-    await this.customerRepository.save(customerToPersit)
-  }
+		const customerToPersit = Customer.create({
+			...input,
+			password: this.hasher.encrypt(input.password)
+		});
+		await this.customerRepository.save(customerToPersit);
+	}
 }
 
 type Input = {

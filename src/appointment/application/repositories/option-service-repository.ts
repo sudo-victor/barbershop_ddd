@@ -1,4 +1,4 @@
-import { OptionService } from "@/appointment/enterprise/entities/option-service";
+import { OptionService } from '@/appointment/enterprise/entities/option-service';
 
 export interface OptionServiceRepository {
   save(optionService: OptionService): Promise<void>

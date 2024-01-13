@@ -1,4 +1,4 @@
-import { Customer } from "@/appointment/enterprise/entities/customer";
+import { Customer } from '@/appointment/enterprise/entities/customer';
 
 export interface CustomerRepository {
   findByCpf(cpf: string): Promise<Customer | undefined>
