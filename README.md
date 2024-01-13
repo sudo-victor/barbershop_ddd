@@ -25,8 +25,6 @@ entidades:
   photo: string
 }
 
-
-
 funcionalidades:
 - Cadastro do cliente  -  OK
 - Cliente fazer agendamento  -  OK
